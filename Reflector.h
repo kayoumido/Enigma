@@ -13,9 +13,12 @@ Compilateur : MinGW-g++ 6.3.0
 #ifndef REFLECTOR_H
 #define REFLECTOR_H
 
+#include <string>
 class Reflector {
     public:
+        Reflector(std::string id_reflector);
+        bool enabled;
     private:
-        int mapping[26];
+        std::string mapping;
 };
 #endif /* REFLECTOR_H */
