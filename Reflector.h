@@ -16,5 +16,6 @@ Compilateur : MinGW-g++ 6.3.0
 class Reflector {
     public:
     private:
+        int mapping[26];
 };
 #endif /* REFLECTOR_H */
