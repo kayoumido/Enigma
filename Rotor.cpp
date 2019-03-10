@@ -3,6 +3,7 @@
 //
 
 #include "Rotor.h"
+#include "Enigma.h"
 
 using namespace std;
 
@@ -28,8 +29,8 @@ string Rotor::getWiring(const string &ID) {
 
 }
 
-Rotor::Rotor(const string &ID, const string &NOTCH, char position) :
-    wiring(Rotor::getWiring(ID)), notch(NOTCH), position(position) {}
+Rotor::Rotor(const string &ID, char notch, char position) :
+    wiring(Rotor::getWiring(ID)), notch(notch), position(position) {}
 
 Rotor &Rotor::operator=(const Rotor &ROTOR) {
 
@@ -38,4 +39,24 @@ Rotor &Rotor::operator=(const Rotor &ROTOR) {
     this->position = ROTOR.position;
 
     return *this;
+}
+
+bool Rotor::justPassedNotched() const {
+    return this->position == this->notch + 1;
+}
+
+void Rotor::turn() {
+
+    if (this->position == 'Z')
+        this->position = 'A';
+    else
+        ++this->position;
+}
+
+char Rotor::convert(char toConvert) const {
+
+    size_t toConvertPos = this->ENTRY.find(toConvert);
+    size_t rotorPos     = this->ENTRY.find(this->position);
+
+    return this->wiring.at((rotorPos + toConvertPos) % 26);
 }

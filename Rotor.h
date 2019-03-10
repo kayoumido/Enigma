@@ -13,15 +13,23 @@ class Rotor {
 
 public:
 
-    Rotor(const std::string &ID, const std::string &NOTCH, char position);
+    Rotor(const std::string &ID, char notch, char position);
 
     Rotor& operator=(const Rotor& ROTOR);
+
+    void turn();
+
+    char convert(char toConvert) const;
+
+    bool justPassedNotched() const;
+
 private:
     std::string wiring;
-    std::string notch;
+    char notch;
     char position;
-    const std::string ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; // put static?
+
+    const std::string ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 };
 
 
-#endif //LABO2_ROTOR_H
+#endif
