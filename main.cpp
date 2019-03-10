@@ -15,14 +15,32 @@ Compilateur : MinGW-g++ 6.3.0
  */
 
 #include <iostream>
-#include "Reflector.h"
 #include <string>
+
+#include "Rotor.h"
+#include "Reflector.h"
+#include "Enigma.h"
 
 using namespace std;
 
- int main() {
-    string id_reflector = "UKW-A";
-    Reflector r = Reflector(id_reflector);
-   
+int main() {
+
+    Rotor left(     "II", 'C');
+    Rotor middle(   "IV", 'K');
+    Rotor right(    "I", 'M');
+
+    Reflector reflector("UKW-B");
+
+    Enigma enigma(left, middle, right, reflector);
+
+    string toConvert = "MDXMDAORNSLZBJTCDSABGHLVWA";
+
+    string result;
+    for (char c : toConvert) {
+        result += enigma.convert(c);
+    }
+
+    cout << result;
+
     return EXIT_SUCCESS;
- }
+}
