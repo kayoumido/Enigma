@@ -19,6 +19,9 @@ Compilateur : MinGW-g++ 6.3.0
 
 using namespace std;
 
+const string Reflector::ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+
 const string Reflector::DEFAULT_WIRING[] = {
     "EJMZALYXVBWFCRQUONTSPIKHGD",
     "YRUHQSLDPXNGOKMIEBFZCWVJAT",
@@ -35,4 +38,8 @@ string Reflector::getWiring(const string &ID) {
 }
 
 Reflector::Reflector(const string &ID) : wiring(Reflector::getWiring(ID)) {}
+
+char Reflector::getCharReflect(char toConvert) {
+    return this->wiring.at(Reflector::ENTRY.find(toConvert));
+}
 

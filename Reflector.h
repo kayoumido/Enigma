@@ -18,11 +18,12 @@ Compilateur : MinGW-g++ 6.3.0
 
 class Reflector {
     const static std::string DEFAULT_WIRING[];
+    const static std::string ENTRY;
     std::string static getWiring(const std::string &ID);
-
 public:
     Reflector(const std::string &ID);
 
+    char getCharReflect(char toConvert);
 private:
     std::string wiring;
 };
