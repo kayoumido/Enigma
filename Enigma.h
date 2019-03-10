@@ -5,10 +5,12 @@
 #ifndef LABO2_ENIGMA_H
 #define LABO2_ENIGMA_H
 
+#include <vector>
+
 #include "Rotor.h"
 #include "Reflector.h"
 
-enum class RotorPosition {LEFT, RIGHT, MIDDLE};
+enum class RotorPosition {RIGHT, MIDDLE, LEFT};
 
 class Enigma {
 public:
@@ -18,12 +20,10 @@ public:
     void changeRotor(const RotorPosition &ROTOR_TO_CHANGE, const Rotor &NEW_ROTOR);
     void changeRotorPosition(const RotorPosition &ROTOR_1, const RotorPosition &ROTOR_2);
 
-    char convert(char toConvert) const;
+    char convert(char toConvert);
 
 private:
-    Rotor leftRotor;
-    Rotor middleRotor;
-    Rotor rightRotor;
+    std::vector<Rotor> rotors;
 
     Reflector reflector;
 };
