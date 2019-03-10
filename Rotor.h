@@ -8,14 +8,14 @@
 #include <string>
 
 class Rotor {
-    const static std::string DEFAULT_WIRING[];
+    const static std::string DEFAULT_CONFIG[][2];
+    const static std::string ENTRY;
     std::string static getWiring(const std::string &ID);
+    char static getNotch(const std::string &ID);
 
 public:
 
-    Rotor(const std::string &ID, char notch, char position);
-
-    Rotor& operator=(const Rotor& ROTOR);
+    Rotor(const std::string &ID, char position);
 
     void turn();
 
@@ -28,7 +28,7 @@ private:
     char notch;
     char position;
 
-    const std::string ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
 };
 
 
