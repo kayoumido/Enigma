@@ -20,11 +20,11 @@ public:
     void changeRotor(const RotorPosition &ROTOR_TO_CHANGE, const Rotor &NEW_ROTOR);
     void changeRotorPosition(const RotorPosition &ROTOR_1, const RotorPosition &ROTOR_2);
 
+    std::string convert(const std::string &toConvert);
     char convert(char toConvert);
 
 private:
     std::vector<Rotor> rotors;
-
     Reflector reflector;
 };
 

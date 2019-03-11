@@ -46,3 +46,13 @@ char Enigma::convert(char toConvert) {
     return converted;
 }
 
+std::string Enigma::convert(const std::string &toConvert) {
+
+    string result;
+    for (char c : toConvert) {
+        result += this->convert(c);
+    }
+
+    return result;
+}
+
