@@ -16,6 +16,7 @@ class Enigma {
 public:
     Enigma(const Rotor &LEFT_ROTOR, const Rotor &MIDDLE_ROTOR, const Rotor &RIGHT_ROTOR, const Reflector &REFLECTOR, const bool debugMode = false);
 
+    friend std::ostream& operator<<(std::ostream& console, const Enigma& machine);
     void changeReflector(const Reflector &NEW_REFLECTOR);
     void changeRotor(const RotorPosition &ROTOR_TO_CHANGE, const Rotor &NEW_ROTOR);
     void changeRotorPosition(const RotorPosition &ROTOR_1, const RotorPosition &ROTOR_2);

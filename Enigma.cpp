@@ -51,7 +51,7 @@ char Enigma::convert(char toConvert) {
     return converted;
 }
 
-std::string Enigma::convert(const std::string &toConvert) {
+string Enigma::convert(const std::string &toConvert) {
 
     string result;
     for (char c : toConvert) {
@@ -61,3 +61,19 @@ std::string Enigma::convert(const std::string &toConvert) {
     return result;
 }
 
+ostream& operator<<(std::ostream& console, const Enigma& machine){
+    string position[3];
+    position[0] = "LEFT";
+    position[1] = "MIDDLE";
+    position[2] = "RIGHT";
+
+    for(size_t i = 0; i < 3; i++){
+        console << position[i] <<" rotor" << endl
+                << machine.rotors.at(i) << endl
+                << endl;
+    }
+
+    console << machine.reflector;
+    
+    return console;
+}
