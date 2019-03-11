@@ -36,12 +36,7 @@ int main() {
 
     string toConvert = "MDXMDAORNSLZBJTCDSABGHLVWA";
 
-    string result;
-    for (char c : toConvert) {
-        result += enigma.convert(c);
-    }
-
-    cout << result;
+    cout << enigma.convert(toConvert);
 
     return EXIT_SUCCESS;
 }
