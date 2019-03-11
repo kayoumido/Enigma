@@ -46,7 +46,7 @@ char Rotor::getNotch(const string &ID) {
 
 
 Rotor::Rotor(const string &ID, char position) :
-    wiring(Rotor::getWiring(ID)), notch(Rotor::getNotch(ID)), position(position) {}
+    wiring(Rotor::getWiring(ID)), notch(Rotor::getNotch(ID)), position(position), id(ID) {}
 
 bool Rotor::justPassedNotched() {
     if(this->turned){
@@ -78,4 +78,17 @@ char Rotor::decode(char toDecode) const {
     size_t rotorPos     = Rotor::ENTRY.find(this->position);
 
     return Rotor::ENTRY.at((toDecodePos - rotorPos + 26) % 26);
+}
+
+ostream& operator<<(ostream& console, const Rotor& r){
+    string pos_wiring;
+    size_t index = r.wiring.find(r.position);
+    pos_wiring = r.wiring.substr(index) + r.wiring.substr(0, index);
+    console << "rotor id    : " << r.id << endl 
+         << "entry       : " << r.ENTRY << endl
+         << "def wiring  : " << r.wiring << endl
+         << "position    : " << r.position << endl
+         << "pos wiring  : " << pos_wiring << endl
+         << "notch       : " << r.notch << endl;
+    return console;
 }
