@@ -28,7 +28,9 @@ void Enigma::changeReflector(const Reflector &NEW_REFLECTOR) {
     this->reflector = NEW_REFLECTOR;
 }
 
-void Enigma::changeRotorPosition(const RotorPosition &ROTOR_1, const RotorPosition &ROTOR_2) {}
+void Enigma::changeRotorPosition(const RotorPosition &ROTOR, char position) {
+    this->rotors.at((size_t)ROTOR).setPosition(position);
+}
 
 char Enigma::convert(char toConvert) {
 
