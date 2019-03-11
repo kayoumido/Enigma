@@ -37,9 +37,19 @@ string Reflector::getWiring(const string &ID) {
     if (ID == "UKW-C") return Reflector::DEFAULT_WIRING[2];
 }
 
-Reflector::Reflector(const string &ID) : wiring(Reflector::getWiring(ID)) {}
+Reflector::Reflector(const string &ID) : wiring(Reflector::getWiring(ID)), id(ID) {}
 
 char Reflector::getCharReflect(char toConvert) {
     return this->wiring.at(Reflector::ENTRY.find(toConvert));
+}
+
+std::string Reflector::getId(){
+   return this->wiring;
+}
+
+ostream& operator<<(ostream& lhs, const Reflector& rhs) {
+   lhs << "reflector  : " << rhs.id << endl
+       << "wiring     : " << rhs.wiring << endl;
+   return lhs;
 }
 
