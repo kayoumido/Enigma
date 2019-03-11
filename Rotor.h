@@ -26,6 +26,7 @@ public:
 
 private:
     std::string wiring;
+    bool turned = false;
     char notch;
     char position;
 };

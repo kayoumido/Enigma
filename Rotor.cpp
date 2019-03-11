@@ -49,15 +49,20 @@ Rotor::Rotor(const string &ID, char position) :
     wiring(Rotor::getWiring(ID)), notch(Rotor::getNotch(ID)), position(position) {}
 
 bool Rotor::justPassedNotched() const {
-    return this->position == this->notch + 1;
+    if(this->turned){
+        this->turned = false;
+        return this->position == this->notch + 1;
+    }else{
+        return false;
+    }
 }
 
 void Rotor::turn() {
-
     if (this->position == 'Z')
         this->position = 'A';
     else
         ++this->position;
+    turned = true;
 }
 
 char Rotor::convert(char toConvert) const {
