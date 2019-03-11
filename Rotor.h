@@ -26,6 +26,8 @@ public:
 
     bool justPassedNotched();
 
+    void setPosition(char position);
+
 private:
     std::string wiring;
     bool turned = false;

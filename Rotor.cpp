@@ -80,6 +80,10 @@ char Rotor::decode(char toDecode) const {
     return Rotor::ENTRY.at((toDecodePos - rotorPos + 26) % 26);
 }
 
+void Rotor::setPosition(char position) {
+    this->position = position;
+}
+
 ostream& operator<<(ostream& console, const Rotor& r){
     string pos_wiring;
     size_t index = r.wiring.find(r.position);

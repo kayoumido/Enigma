@@ -18,7 +18,7 @@ public:
 
     void changeReflector(const Reflector &NEW_REFLECTOR);
     void changeRotor(const RotorPosition &ROTOR_TO_CHANGE, const Rotor &NEW_ROTOR);
-    void changeRotorPosition(const RotorPosition &ROTOR_1, const RotorPosition &ROTOR_2);
+    void changeRotorPosition(const RotorPosition &ROTOR, char position);
     void toggleDebug();
 
     std::string convert(const std::string &toConvert);
