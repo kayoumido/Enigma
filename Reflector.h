@@ -14,11 +14,21 @@ Compilateur : MinGW-g++ 6.3.0
 #define REFLECTOR_H
 
 #include <string>
+#include <iostream>
+
+
 class Reflector {
-    public:
-        Reflector(std::string id_reflector);
-        bool enabled;
-    private:
-        std::string mapping;
+   friend std::ostream& operator<<(std::ostream& lhs, const Reflector& rhs);
+    const static std::string DEFAULT_WIRING[];
+    const static std::string ENTRY;
+    std::string static getWiring(const std::string &ID);
+public:
+    Reflector(const std::string &ID);
+    char getCharReflect(char toConvert);
+    std::string getId();
+private:
+    std::string wiring;
+    std::string id;
 };
-#endif /* REFLECTOR_H */
+
+#endif
