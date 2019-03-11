@@ -16,6 +16,7 @@ Compilateur : MinGW-g++ 6.3.0
 
 #include <iostream>
 #include <string>
+#include <array>
 
 #include "Rotor.h"
 #include "Reflector.h"
@@ -25,9 +26,9 @@ using namespace std;
 
 int main() {
 
-    Rotor left(     "II", 'C');
-    Rotor middle(   "IV", 'K');
-    Rotor right(    "I", 'M');
+    Rotor left  ("II", 'C');
+    Rotor middle("IV", 'K');
+    Rotor right ("I" , 'M');
 
     Reflector reflector("UKW-B");
 

@@ -2,6 +2,8 @@
 // Created by deekay on 07/03/19.
 //
 
+#include <cmath>
+
 #include "Rotor.h"
 
 using namespace std;
@@ -64,4 +66,11 @@ char Rotor::convert(char toConvert) const {
     size_t rotorPos     = Rotor::ENTRY.find(this->position);
 
     return this->wiring.at((rotorPos + toConvertPos) % 26);
+}
+
+char Rotor::decode(char toDecode) const {
+    size_t toDecodePos  = this->wiring.find(toDecode);
+    size_t rotorPos     = Rotor::ENTRY.find(this->position);
+
+    return Rotor::ENTRY.at((toDecodePos - rotorPos + 26) % 26);
 }

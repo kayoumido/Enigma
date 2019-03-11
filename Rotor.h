@@ -20,6 +20,7 @@ public:
     void turn();
 
     char convert(char toConvert) const;
+    char decode(char toDecode) const;
 
     bool justPassedNotched() const;
 
@@ -27,9 +28,6 @@ private:
     std::string wiring;
     char notch;
     char position;
-
-
 };
-
 
 #endif
