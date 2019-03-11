@@ -22,7 +22,7 @@ public:
     char convert(char toConvert) const;
     char decode(char toDecode) const;
 
-    bool justPassedNotched() const;
+    bool justPassedNotched();
 
 private:
     std::string wiring;

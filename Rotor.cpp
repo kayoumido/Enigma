@@ -48,7 +48,7 @@ char Rotor::getNotch(const string &ID) {
 Rotor::Rotor(const string &ID, char position) :
     wiring(Rotor::getWiring(ID)), notch(Rotor::getNotch(ID)), position(position) {}
 
-bool Rotor::justPassedNotched() const {
+bool Rotor::justPassedNotched() {
     if(this->turned){
         this->turned = false;
         return this->position == this->notch + 1;
