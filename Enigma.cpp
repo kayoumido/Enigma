@@ -7,11 +7,16 @@
 using namespace std;
 
 Enigma::Enigma(const Rotor &LEFT_ROTOR, const Rotor &MIDDLE_ROTOR, const Rotor &RIGHT_ROTOR,
-               const Reflector &REFLECTOR) : reflector(REFLECTOR) {
+               const Reflector &REFLECTOR, const bool debugMode) : reflector(REFLECTOR), debug(debugMode) {
 
     this->rotors.push_back(RIGHT_ROTOR);
     this->rotors.push_back(MIDDLE_ROTOR);
     this->rotors.push_back(LEFT_ROTOR);
+}
+
+void Enigma::toggleDebug(){
+    this->debug = !this->debug;
+    return;
 }
 
 void Enigma::changeRotor(const RotorPosition &ROTOR_TO_CHANGE, const Rotor &NEW_ROTOR) {

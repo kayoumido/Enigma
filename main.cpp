@@ -32,16 +32,17 @@ int main() {
 
     Reflector reflector("UKW-B");
 
-    Enigma enigma(left, middle, right, reflector);
+    Enigma enigma(left, middle, right, reflector, true);
 
     string toConvert = "MDXMDAORNSLZBJTCDSABGHLVWA";
-
     string result;
     for (char c : toConvert) {
         result += enigma.convert(c);
     }
 
     cout << result;
+    int tmp;
+    cin >> tmp;
 
     return EXIT_SUCCESS;
 }
