@@ -38,9 +38,5 @@ int main() {
 
     cout << enigma.convert(toConvert);
 
-    cout << result;
-    int tmp;
-    cin >> tmp;
-
     return EXIT_SUCCESS;
 }
