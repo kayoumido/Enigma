@@ -46,12 +46,12 @@ char Rotor::getNotch(const string &ID) {
 
 
 Rotor::Rotor(const string &ID, char position) :
-    wiring(Rotor::getWiring(ID)), notch(Rotor::getNotch(ID)), position(position), id(ID) {}
+    WIRING(Rotor::getWiring(ID)), NOTCH(Rotor::getNotch(ID)), position(position), ID(ID) {}
 
 bool Rotor::justPassedNotched() {
     if(this->turned){
         this->turned = false;
-        return this->position == this->notch + 1;
+        return this->position == this->NOTCH + 1;
     }else{
         return false;
     }
@@ -70,11 +70,11 @@ char Rotor::convert(char toConvert) const {
     size_t toConvertPos = Rotor::ENTRY.find(toConvert);
     size_t rotorPos     = Rotor::ENTRY.find(this->position);
 
-    return this->wiring.at((rotorPos + toConvertPos) % 26);
+    return this->WIRING.at((rotorPos + toConvertPos) % 26);
 }
 
 char Rotor::decode(char toDecode) const {
-    size_t toDecodePos  = this->wiring.find(toDecode);
+    size_t toDecodePos  = this->WIRING.find(toDecode);
     size_t rotorPos     = Rotor::ENTRY.find(this->position);
 
     return Rotor::ENTRY.at((toDecodePos - rotorPos + 26) % 26);
@@ -86,13 +86,25 @@ void Rotor::setPosition(char position) {
 
 ostream& operator<<(ostream& console, const Rotor& r){
     string pos_wiring;
-    size_t index = r.wiring.find(r.position);
-    pos_wiring = r.wiring.substr(index) + r.wiring.substr(0, index);
-    console << "rotor id    : " << r.id << endl 
-         << "entry       : " << r.ENTRY << endl
-         << "def wiring  : " << r.wiring << endl
+    size_t index = r.WIRING.find(r.position);
+    pos_wiring = r.WIRING.substr(index) + r.WIRING.substr(0, index);
+
+    console << "rotor ID    : " << r.ID << endl
+         << "entry       : " << Rotor::ENTRY << endl
+         << "def WIRING  : " << r.WIRING << endl
          << "position    : " << r.position << endl
-         << "pos wiring  : " << pos_wiring << endl
-         << "notch       : " << r.notch << endl;
+         << "pos WIRING  : " << pos_wiring << endl
+         << "NOTCH       : " << r.NOTCH << endl;
+
     return console;
+}
+
+Rotor &Rotor::operator=(const Rotor &ROTOR) {
+
+    (string &)this->ID = ROTOR.ID;
+    (string &)this->WIRING = ROTOR.WIRING;
+    (string &)this->NOTCH = ROTOR.NOTCH;
+    this->position = ROTOR.position;
+
+    return *this;
 }

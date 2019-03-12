@@ -28,12 +28,15 @@ public:
 
     void setPosition(char position);
 
+    Rotor& operator=(const Rotor &ROTOR);
+
 private:
-    std::string wiring;
-    bool turned = false;
-    char notch;
+    const std::string ID;
+    const std::string WIRING;
+    const char NOTCH;
+
     char position;
-    std::string id;
+    bool turned = false;
 };
 
 #endif

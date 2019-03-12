@@ -25,10 +25,14 @@ class Reflector {
 public:
     Reflector(const std::string &ID);
     char getCharReflect(char toConvert);
+
     std::string getId();
+
+    Reflector& operator=(const Reflector &REFLECTOR);
+
 private:
-    std::string wiring;
-    std::string id;
+    const std::string ID;
+    const std::string WIRING;
 };
 
 #endif
