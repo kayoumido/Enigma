@@ -86,15 +86,15 @@ void Rotor::setPosition(char position) {
 
 ostream& operator<<(ostream& console, const Rotor& r){
     string pos_wiring;
-    size_t index = r.WIRING.find(r.position);
+    size_t index = Rotor::ENTRY.find(r.position);
     pos_wiring = r.WIRING.substr(index) + r.WIRING.substr(0, index);
 
     console << "rotor ID    : " << r.ID << endl
          << "entry       : " << Rotor::ENTRY << endl
-         << "def WIRING  : " << r.WIRING << endl
+         << "def wiring  : " << r.WIRING << endl
          << "position    : " << r.position << endl
-         << "pos WIRING  : " << pos_wiring << endl
-         << "NOTCH       : " << r.NOTCH << endl;
+         << "pos wiring  : " << pos_wiring << endl
+         << "notch       : " << r.NOTCH << endl;
 
     return console;
 }
