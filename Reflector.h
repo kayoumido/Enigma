@@ -18,10 +18,13 @@ Compilateur : MinGW-g++ 6.3.0
 
 
 class Reflector {
-   friend std::ostream& operator<<(std::ostream& lhs, const Reflector& rhs);
+    friend std::ostream &operator<<(std::ostream &lhs, const Reflector &rhs);
+
     const static std::string DEFAULT_WIRING[];
     const static std::string ENTRY;
+
     std::string static getWiring(const std::string &ID);
+
 public:
     explicit Reflector(const std::string &ID);
 
@@ -29,7 +32,7 @@ public:
 
     std::string getId();
 
-    Reflector& operator=(const Reflector &REFLECTOR);
+    Reflector &operator=(const Reflector &REFLECTOR);
 
 private:
     const std::string ID;

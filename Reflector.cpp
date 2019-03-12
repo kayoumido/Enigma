@@ -23,9 +23,9 @@ const string Reflector::ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
 const string Reflector::DEFAULT_WIRING[] = {
-    "EJMZALYXVBWFCRQUONTSPIKHGD",
-    "YRUHQSLDPXNGOKMIEBFZCWVJAT",
-    "FVPJIAOYEDRZXWGCTKUQSBNMHL"
+        "EJMZALYXVBWFCRQUONTSPIKHGD",
+        "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+        "FVPJIAOYEDRZXWGCTKUQSBNMHL"
 };
 
 
@@ -46,19 +46,19 @@ char Reflector::getCharReflect(char toConvert) {
 
 Reflector &Reflector::operator=(const Reflector &REFLECTOR) {
 
-    (string &)this->WIRING = REFLECTOR.WIRING;
-    (string &)this->ID = REFLECTOR.ID;
+    (string &) this->WIRING = REFLECTOR.WIRING;
+    (string &) this->ID = REFLECTOR.ID;
 
     return *this;
 }
 
-std::string Reflector::getId(){
-   return this->WIRING;
+std::string Reflector::getId() {
+    return this->WIRING;
 }
 
-ostream& operator<<(ostream& lhs, const Reflector& rhs) {
-   lhs << "reflector  : " << rhs.ID << endl
-       << "wiring     : " << rhs.WIRING << endl;
-   return lhs;
+ostream &operator<<(ostream &lhs, const Reflector &rhs) {
+    lhs << "reflector  : " << rhs.ID << endl
+        << "wiring     : " << rhs.WIRING << endl;
+    return lhs;
 }
 

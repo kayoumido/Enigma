@@ -26,17 +26,19 @@ using namespace std;
 
 int main() {
 
-    Rotor right ("I" , 'R');
-    Rotor left  ("II", 'C');
+    Rotor right("I", 'R');
+    Rotor left("II", 'C');
     Rotor middle("IV", 'K');
 
     Reflector reflector("UKW-B");
 
     Enigma enigma(left, middle, right, reflector);
+
     enigma.toggleDebug();
-    string toConvert = "ZNTDHXKLAJDXSJWE";
-    int tmp;
-    cout << enigma.convert(toConvert);
-    cin >> tmp;
+
+    string toConvert = "MDXMDAORNSLZBJTCDSABGHLVWA";
+
+    cout << enigma.convert("B");
+
     return EXIT_SUCCESS;
 }
