@@ -24,7 +24,7 @@ public:
     char convert(char toConvert) const;
     char decode(char toDecode) const;
 
-    bool justPassedNotched();
+    bool justPassedNotch();
 
     void setPosition(char position);
 

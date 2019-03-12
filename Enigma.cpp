@@ -7,7 +7,7 @@
 using namespace std;
 
 Enigma::Enigma(const Rotor &LEFT_ROTOR, const Rotor &MIDDLE_ROTOR, const Rotor &RIGHT_ROTOR,
-               const Reflector &REFLECTOR, const bool debugMode) : reflector(REFLECTOR), debug(debugMode) {
+               const Reflector &REFLECTOR, const bool debugMode) : debug(debugMode), reflector(REFLECTOR) {
 
     this->rotors.push_back(RIGHT_ROTOR);
     this->rotors.push_back(MIDDLE_ROTOR);
@@ -16,7 +16,6 @@ Enigma::Enigma(const Rotor &LEFT_ROTOR, const Rotor &MIDDLE_ROTOR, const Rotor &
 
 void Enigma::toggleDebug(){
     this->debug = !this->debug;
-    return;
 }
 
 void Enigma::changeRotor(const RotorPosition &ROTOR_TO_CHANGE, const Rotor &NEW_ROTOR) {
@@ -36,7 +35,7 @@ char Enigma::convert(char toConvert) {
 
     char converted = toConvert;
     for (size_t i = 0; i < this->rotors.size(); ++i) {
-        if (i == 0 or this->rotors.at(i - 1).justPassedNotched()) {
+        if (i == 0 or this->rotors.at(i - 1).justPassedNotch()) {
             this->rotors.at(i).turn();
         }
 
