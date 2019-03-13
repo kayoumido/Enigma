@@ -1,16 +1,32 @@
-//
-// Created by deekay on 07/03/19.
-//
+/*
+-----------------------------------------------------------------------------------
+Laboratoire : 02
+Fichier     : Enigma.cpp
+Auteur(s)   : Doran Kayoumi, Jérémie Melly, Pierre-Olivier Sandoz
 
+Date        : 07.03.2019
+But         : Implémentation de la classe Enigma
+Remarque(s) : -
+
+Compilateur : MinGW-g++ 6.3.0
+-----------------------------------------------------------------------------------
+ */
 #include "Enigma.h"
 
 using namespace std;
 
+/**
+ * @brief Display the results of the conversion of a char
+ *
+ * @param first char to display
+ * @param second char to display
+ * @param direction in which the conversion is done
+ */
 void displayResult(const char &first, const char &second, bool direction);
 
 
 Enigma::Enigma(const Rotor &LEFT_ROTOR, const Rotor &MIDDLE_ROTOR, const Rotor &RIGHT_ROTOR,
-               const Reflector &REFLECTOR, const bool debugMode) : debug(debugMode), reflector(REFLECTOR) {
+               const Reflector &REFLECTOR, bool debug) : debug(debug), reflector(REFLECTOR) {
 
     this->rotors.push_back(RIGHT_ROTOR);
     this->rotors.push_back(MIDDLE_ROTOR);
@@ -34,16 +50,27 @@ void Enigma::changeRotorPosition(const RotorPosition &ROTOR, char position) {
     this->rotors.at((size_t) ROTOR).setPosition(position);
 }
 
+void Enigma::turnRotors() {
+
+    if (this->rotors.at(0).reachedNotch()) {
+
+        if (this->rotors.at(1).reachedNotch()) {
+            this->rotors.at(2).turn();
+        }
+        this->rotors.at(1).turn();
+    }
+
+    this->rotors.at(0).turn();
+}
+
 char Enigma::convert(char toConvert) {
 
     char current;
     char converted = toConvert;
 
-    for (size_t i = 0; i < this->rotors.size(); ++i) {
-        if (i == 0 or this->rotors.at(i - 1).justPassedNotch()) {
-            this->rotors.at(i).turn();
-        }
+    this->turnRotors();
 
+    for (size_t i = 0; i < this->rotors.size(); ++i) {
         current = converted;
         converted = this->rotors.at(i).convert(converted);
 
@@ -88,23 +115,23 @@ string Enigma::convert(const std::string &toConvert) {
     return result;
 }
 
-ostream &operator<<(std::ostream &console, const Enigma &machine) {
+ostream &operator<<(std::ostream &os, const Enigma &ENIGMA) {
     string position[3];
     position[0] = "RIGHT";
     position[1] = "MIDDLE";
     position[2] = "LEFT";
 
     for (size_t i = 0; i < 3; i++) {
-        console << position[i] << " rotor" << endl
-                << machine.rotors.at(i) << endl
+        os << position[i] << " rotor" << endl
+                << ENIGMA.rotors.at(i) << endl
                 << endl;
     }
 
     cout << "Reflector" << endl;
 
-    console << machine.reflector;
+    os << ENIGMA.reflector;
 
-    return console;
+    return os;
 }
 
 void displayResult(const char &first, const char &second, bool direction) {

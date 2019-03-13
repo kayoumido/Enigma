@@ -1,47 +1,46 @@
-//
-// Created by deekay on 07/03/19.
-//
+/*
+-----------------------------------------------------------------------------------
+Laboratoire : 02
+Fichier     : Rotor.cpp
+Auteur(s)   : Doran Kayoumi, Jérémie Melly, Pierre-Olivier Sandoz
 
-#include <cmath>
+Date        : 07.03.2019
+But         : Implémentation ce la class Rotor
+Remarque(S) : -
+
+Compilateur : MinGW-g++ 6.3.0
+-----------------------------------------------------------------------------------
+ */
 
 #include "Rotor.h"
 
 using namespace std;
 
 const vector<vector<string>> Rotor::DEFAULT_CONFIG = {
-        {"EKMFLGDQVZNTOWYHXUSPAIBRCJ", "R"},
-        {"AJDKSIRUXBLHWTMCQGZNPYFVOE", "F"},
-        {"BDFHJLCPRTXVZNYEIWGAKMUSQO", "W"},
-        {"ESOVPZJAYQUIRHXLNFTGKDCMWB", "K"},
-        {"VZBRGITYUPSDNHLXAWMJQOFECK", "A"}
+        {"I",   "EKMFLGDQVZNTOWYHXUSPAIBRCJ", "R"},
+        {"II",  "AJDKSIRUXBLHWTMCQGZNPYFVOE", "F"},
+        {"III", "BDFHJLCPRTXVZNYEIWGAKMUSQO", "W"},
+        {"IV",  "ESOVPZJAYQUIRHXLNFTGKDCMWB", "K"},
+        {"V",   "VZBRGITYUPSDNHLXAWMJQOFECK", "A"}
 };
 
 const string Rotor::ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 vector<string> Rotor::getConfig(const string &ID) {
 
-    if (ID == "I") return Rotor::DEFAULT_CONFIG[0];
+    for (vector<string> config : Rotor::DEFAULT_CONFIG) {
+        if (config.at(0) == ID) return config;
+    }
 
-    if (ID == "II") return Rotor::DEFAULT_CONFIG[1];
-
-    if (ID == "III") return Rotor::DEFAULT_CONFIG[2];
-
-    if (ID == "IV") return Rotor::DEFAULT_CONFIG[3];
-
-    if (ID == "V") return Rotor::DEFAULT_CONFIG[4];
-
+    // If this point is reached, the wanted config doesn't exist
+    //  an exception should be thrown if this point is reached
 }
 
 Rotor::Rotor(const string &ID, char position) :
-        ID(ID), WIRING(Rotor::getConfig(ID)[0]), NOTCH(Rotor::getConfig(ID)[1].at(0)), position(position) {}
+        ID(ID), WIRING(Rotor::getConfig(ID)[1]), NOTCH(Rotor::getConfig(ID)[2].at(0)), position(position) {}
 
-bool Rotor::justPassedNotch() {
-    if (this->turned) {
-        this->turned = false;
-        return this->position == this->NOTCH + 1;
-    } else {
-        return false;
-    }
+bool Rotor::reachedNotch() {
+    return this->position == this->NOTCH;
 }
 
 void Rotor::turn() {
@@ -61,6 +60,7 @@ char Rotor::convert(char toConvert) const {
 }
 
 char Rotor::decode(char toDecode) const {
+
     size_t toDecodePos = this->WIRING.find(toDecode);
     size_t rotorPos = Rotor::ENTRY.find(this->position);
 
@@ -71,19 +71,19 @@ void Rotor::setPosition(char position) {
     this->position = position;
 }
 
-ostream &operator<<(ostream &console, const Rotor &r) {
+ostream &operator<<(ostream &os, const Rotor &r) {
     string pos_wiring;
     size_t index = Rotor::ENTRY.find(r.position);
     pos_wiring = r.WIRING.substr(index) + r.WIRING.substr(0, index);
 
-    console << "rotor ID    : " << r.ID << endl
-            << "entry       : " << Rotor::ENTRY << endl
-            << "def wiring  : " << r.WIRING << endl
-            << "position    : " << r.position << endl
-            << "pos wiring  : " << pos_wiring << endl
-            << "notch       : " << r.NOTCH << endl;
+    os << "rotor ID    : " << r.ID << endl
+       << "entry       : " << Rotor::ENTRY << endl
+       << "def wiring  : " << r.WIRING << endl
+       << "position    : " << r.position << endl
+       << "pos wiring  : " << pos_wiring << endl
+       << "notch       : " << r.NOTCH << endl;
 
-    return console;
+    return os;
 }
 
 Rotor &Rotor::operator=(const Rotor &ROTOR) {
