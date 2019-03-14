@@ -66,7 +66,7 @@ void Enigma::turnRotors() {
 char Enigma::convert(char toConvert) {
 
     char current;
-    char converted = toConvert;
+    char converted = toupper(toConvert);
 
     this->turnRotors();
 

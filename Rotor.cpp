@@ -37,7 +37,7 @@ vector<string> Rotor::getConfig(const string &ID) {
 }
 
 Rotor::Rotor(const string &ID, char position) :
-        ID(ID), WIRING(Rotor::getConfig(ID)[1]), NOTCH(Rotor::getConfig(ID)[2].at(0)), position(position) {}
+        ID(ID), WIRING(Rotor::getConfig(ID)[1]), NOTCH(Rotor::getConfig(ID)[2].at(0)), position(toupper(position)) {}
 
 bool Rotor::reachedNotch() {
     return this->position == this->NOTCH;
@@ -48,7 +48,6 @@ void Rotor::turn() {
         this->position = 'A';
     else
         ++this->position;
-    turned = true;
 }
 
 char Rotor::convert(char toConvert) const {
