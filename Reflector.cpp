@@ -5,10 +5,8 @@ Fichier     : Reflector.cpp
 Auteur(s)   : Doran Kayoumi, Jérémie Melly, Pierre-Olivier Sandoz
 
 Date        : 07.03.2019
-
-But         :
- 
-Remarques   :
+But         : Implémentation de la classe Reflector
+Remarque(s) : -
 
 Compilateur : MinGW-g++ 6.3.0
 -----------------------------------------------------------------------------------
@@ -21,35 +19,41 @@ using namespace std;
 
 const string Reflector::ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
-const string Reflector::DEFAULT_WIRING[] = {
-    "EJMZALYXVBWFCRQUONTSPIKHGD",
-    "YRUHQSLDPXNGOKMIEBFZCWVJAT",
-    "FVPJIAOYEDRZXWGCTKUQSBNMHL"
+const vector<vector<string>> Reflector::DEFAULT_CONFIG = {
+        {"UKW-A", "EJMZALYXVBWFCRQUONTSPIKHGD"},
+        {"UKW-B", "YRUHQSLDPXNGOKMIEBFZCWVJAT"},
+        {"UKW-C", "FVPJIAOYEDRZXWGCTKUQSBNMHL"},
 };
 
 
-string Reflector::getWiring(const string &ID) {
-    if (ID == "UKW-A") return Reflector::DEFAULT_WIRING[0];
+string Reflector::getConfig(const string &ID) {
 
-    if (ID == "UKW-B") return Reflector::DEFAULT_WIRING[1];
+    for (vector<string> config : Reflector::DEFAULT_CONFIG) {
+        if (config.at(0) == ID) return config.at(1);
+    }
 
-    if (ID == "UKW-C") return Reflector::DEFAULT_WIRING[2];
+    // If this point is reached, the wanted config doesn't exist
+    //  an exception should be thrown if this point is reached
 }
 
-Reflector::Reflector(const string &ID) : wiring(Reflector::getWiring(ID)), id(ID) {}
 
-char Reflector::getCharReflect(char toConvert) {
-    return this->wiring.at(Reflector::ENTRY.find(toConvert));
+Reflector::Reflector(const string &ID) : ID(ID), WIRING(Reflector::getConfig(ID)) {}
+
+char Reflector::getCharReflect(char c) {
+    return this->WIRING.at(Reflector::ENTRY.find(c));
 }
 
-std::string Reflector::getId(){
-   return this->wiring;
+Reflector &Reflector::operator=(const Reflector &REFLECTOR) {
+
+    (string &) this->WIRING = REFLECTOR.WIRING;
+    (string &) this->ID = REFLECTOR.ID;
+
+    return *this;
 }
 
-ostream& operator<<(ostream& lhs, const Reflector& rhs) {
-   lhs << "reflector  : " << rhs.id << endl
-       << "wiring     : " << rhs.wiring << endl;
-   return lhs;
+ostream &operator<<(ostream &os, const Reflector &reflector) {
+    os << "reflector  : " << reflector.ID << endl
+       << "wiring     : " << reflector.WIRING << endl;
+    return os;
 }
 
