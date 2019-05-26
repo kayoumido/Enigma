@@ -19,7 +19,6 @@ using namespace std;
 
 const string Reflector::ENTRY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-
 const vector<vector<string>> Reflector::DEFAULT_CONFIG = {
         {"UKW-A", "EJMZALYXVBWFCRQUONTSPIKHGD"},
         {"UKW-B", "YRUHQSLDPXNGOKMIEBFZCWVJAT"},

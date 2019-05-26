@@ -21,7 +21,6 @@ Compilateur : MinGW-g++ 6.3.0
 
 
 class Reflector {
-
     const static std::string ENTRY;
     const static std::vector<std::vector<std::string>> DEFAULT_CONFIG;
 
